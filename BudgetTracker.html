@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF=7">
+        <meta name="viewport" cpntent="width=devise-width,initial-scale=1.2">
+        <title>Personal Budget Tracker</title>
+    </head>
+    <body>
+        <header>
+            <h1>Personal Budget Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">View Budget</a></li>
+                    <li><a href="#">Add Expense</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <h1>Welcome to Personal Budget Tracker</h1>
+            <p>This tracker allows you to manage your expenses by allowing you to inputyour income and expenses, categorize them and view summary in table form</p> 
+        </section>
+        <section>
+            <h1>Add Expense/Income</h1>
+            <form id="budget-form">
+            <label for="income">Income:</label>
+            <input type="number" id="income" name="income"><br><br>
+            <label for="expense">Expense:</label>
+            <input type="number" id="expense" name="expense"><br<br>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Other">Other</option>
+            </select><br><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        </section>
+        <section>
+            <h1>Budget Summary</h1>
+            <table id="budget-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="budget-table-body"></tbody>
+            </table>
+        </section>
+        <footer>
+            <p>&copy; 2025 Personal Budget Tracker. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        </footer>
+        <script>
+            const form = document.getElementById('budget-form');
+            const tableBody = document.getElementById('budget-table-body');
+            form.addEventListener('submit',(e)=>{
+                e.preventDefault();
+                const income = document.getElementById('income').value;
+                const expense = document.getElementById('expense').value;
+                const category = document.getElementById('category').value;
+                const date = document.getElementById('date').value;
+                let type;
+                if(income !== ''){
+                    type = 'Income';
+                } else{
+                    type = 'Expense';
+                }
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${category}</td>
+                <td>${income !== '' ? income : expense}</td>
+                <td>${date}</td>
+                <td>${type}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        </script>
+    </body>
+</html>
